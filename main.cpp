@@ -15,7 +15,7 @@ int	main()
 		std::cerr << "Unable to initialise Window." << std::endl;
 		return -1;
 	}
-	if(!BasicGame->initGLEW())
+	if(BasicGame->initGLEW())
 	{
 		std::cerr << "Unable to initialise GLEW." << std::endl;
 		return -2;

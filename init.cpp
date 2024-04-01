@@ -1,6 +1,6 @@
 #include "geng.hpp"
 
-bool	Geng::initWindow(const char* TITLE, int xpos, int	ypos, int width, int height)
+bool	Geng::initWindow(const char* TITLE, int xpos, int ypos, int width, int height)
 {
 	int				success;
 	unsigned	int	window_flags;
@@ -47,7 +47,6 @@ bool	Geng::initGLEW()
 	bool	success = true;
 	glewExperimental = GL_TRUE;
 	GLenum	err = glewInit();
-	GLuint 	vertexBuffer;
 
 	if (GLEW_OK != err)
 	{
@@ -57,9 +56,7 @@ bool	Geng::initGLEW()
 	else
 		while (glGetError() != GL_NO_ERROR){}
 
-	// check if glew is allright
-	glGenBuffers(1, &vertexBuffer);
-	std::cout << "GLEW test: " << vertexBuffer << std::endl;
+	std::cout << "GLEW initialised. Version: " << glewGetString(GLEW_VERSION) << std::endl;
 	return (success);
 }
 
@@ -77,6 +74,11 @@ void	Geng::handleEvent()
 		default:
 			break;
 	}
+}
+
+void	Geng::draw()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 }
 
 void	Geng::update()
