@@ -2,7 +2,7 @@ CXX = g++
 LIBS = -lGL -lSDL2 -lGLEW
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = main.cpp init.cpp
+SRCS = main.cpp init.cpp shaderinit.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: run

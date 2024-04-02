@@ -6,11 +6,11 @@
 #define	GLEW_STATIC
 
 // libs
+#include <iostream>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <GL/gl.h>
-#include <iostream>
 
 #include <fstream>
 #include <sstream>
@@ -32,6 +32,18 @@ public:
 	void	runSet(bool set) {isRuning = set;};
 	bool	runing() {return isRuning;};
 	void	close();
+};
+
+class ShaderScr
+{
+private:
+	std::ifstream		file;
+	std::stringstream	bufferedLines;
+	std::string			line;
+
+public:
+	bool	checkfile(const std::string& filepath);
+	unsigned	int make_module(const std::string& filepath, unsigned int module_type);
 };
 
 #endif
