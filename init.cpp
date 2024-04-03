@@ -34,7 +34,7 @@ bool	Geng::initWindow(const char* TITLE, int xpos, int ypos, int width, int heig
 			return (success = false);
 		}
 
-		glClearColor(1.f, 0.f, 1.f, 0.f); // pink background
+		glClearColor(0.25f, 0.5f, 0.75f, 1.0f); // background color
 
 	}
 	return (success);
@@ -78,13 +78,11 @@ void	Geng::handleEvent()
 
 void	Geng::draw()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
 }
 
 void	Geng::update()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-
 	SDL_GL_SwapWindow(Window);
 }
 

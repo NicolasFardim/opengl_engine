@@ -16,6 +16,8 @@
 #include <sstream>
 #include <string>
 
+#include <vector>
+
 class Geng
 {
 private:
@@ -34,16 +36,23 @@ public:
 	void	close();
 };
 
-class ShaderScr
+class ShaderInit
 {
 private:
-	std::ifstream		file;
-	std::stringstream	bufferedLines;
-	std::string			line;
-
+	std::string readShaderSource(const std::string& filepath);
 public:
-	bool	checkfile(const std::string& filepath);
-	unsigned	int make_module(const std::string& filepath, unsigned int module_type);
+	GLuint	make_module(const std::string& filepath, unsigned int module_type);
+	GLuint	make_shader(const std::string& vertex_filepath, const std::string& fragment_filepath);
+};
+
+class TriangleMesh
+{
+private:
+	unsigned int VBO, VAO, vertex_count;
+public:
+	TriangleMesh();
+	void draw();
+	~TriangleMesh();
 };
 
 #endif

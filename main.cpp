@@ -3,37 +3,42 @@
 /*
 	TODO
 	resizable window, fullscreen, etc... (sdl does not support drag window to resize)
+	add color to some messages
 */
 
-Geng	*BasicGame = nullptr;
-ShaderScr	*SourceShader = nullptr;
+Geng			*Game = nullptr;
+ShaderInit		*Shaders = nullptr;
+TriangleMesh	*Triangle = nullptr;
 
 int	main()
 {
-	BasicGame = new Geng();
-	SourceShader = new  ShaderScr();
+	Game = new Geng();
+	Shaders = new  ShaderInit();
+	GLuint	IntShader;
 
-	SourceShader->checkfile("../roo2/shaders/vertex_shader.txt");
-	SourceShader->checkfile("../roo2/shaders/fragment_shader.txt");
-	SourceShader->checkfile("../roo2/shaders/compiling_shader.txt");
-	if(!BasicGame->initWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768))
+	if(!Game->initWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768))
 	{
 		std::cerr << "Unable to initialise Window." << std::endl;
 		return -1;
 	}
-	if(!BasicGame->initGLEW())
+	if(!Game->initGLEW())
 	{
 		std::cerr << "Unable to initialise GLEW." << std::endl;
 		return -2;
 	}
 	else
 	{
-		BasicGame->runSet(true);
-		while (BasicGame->runing())
+		Triangle = new TriangleMesh();
+		IntShader = Shaders->make_shader("../roo2/shaders/vertex_shader.txt", "../roo2/shaders/fragment_shader.txt");
+		Game->runSet(true);
+		while (Game->runing())
 		{
-			BasicGame->handleEvent();
-			BasicGame->update();
+			Game->handleEvent();
+			glClear(GL_COLOR_BUFFER_BIT);
+			glUseProgram(IntShader);
+			Triangle->draw();
+			Game->update();
 		}
 	}
-	BasicGame->close();
+	Game->close();
 }
