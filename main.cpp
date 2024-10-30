@@ -7,14 +7,12 @@
 */
 
 Geng			*Game = nullptr;
-ShaderInit		*Shaders = nullptr;
+ShaderInit		*Shader = nullptr;
 TriangleMesh	*Triangle = nullptr;
 
 int	main()
 {
 	Game = new Geng();
-	Shaders = new  ShaderInit();
-	GLuint	IntShader;
 
 	if(!Game->initWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768))
 	{
@@ -28,14 +26,14 @@ int	main()
 	}
 	else
 	{
+		Shader = new ShaderInit("shaders/vertex_shader.txt", "shaders/fragment_shader.txt");
 		Triangle = new TriangleMesh();
-		IntShader = Shaders->make_shader("../roo2/shaders/vertex_shader.txt", "../roo2/shaders/fragment_shader.txt");
 		Game->runSet(true);
 		while (Game->runing())
 		{
 			Game->handleEvent();
 			glClear(GL_COLOR_BUFFER_BIT);
-			glUseProgram(IntShader);
+			Shader->Use();
 			Triangle->draw();
 			Game->update();
 		}

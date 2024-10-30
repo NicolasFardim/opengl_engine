@@ -14,10 +14,10 @@ bool	Geng::initWindow(const char* TITLE, int xpos, int ypos, int width, int heig
 	}
 	else
 	{
-		// OpenGl 3.2 context
+		// OpenGl 3.3 context
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 		std::cout << "SDL Subsystem initialised... " << std::endl;
@@ -74,11 +74,6 @@ void	Geng::handleEvent()
 		default:
 			break;
 	}
-}
-
-void	Geng::draw()
-{
-
 }
 
 void	Geng::update()

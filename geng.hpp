@@ -39,10 +39,44 @@ public:
 class ShaderInit
 {
 private:
-	std::string readShaderSource(const std::string& filepath);
+	std::string readShaderSource(const std::string& filePath);
 public:
-	GLuint	make_module(const std::string& filepath, unsigned int module_type);
-	GLuint	make_shader(const std::string& vertex_filepath, const std::string& fragment_filepath);
+	int	Attributes;
+	GLuint shaderProgram;
+
+	// constructor reads, build and link shaders.
+	ShaderInit(const std::string& vertexFilePath, const std::string& fragmentFilePath);
+
+	// compile shaders.
+	GLuint	CompileShader(const std::string& filePath, unsigned int shaderType);
+
+	// use shader
+	void	Use()
+	{
+		glUseProgram(shaderProgram);
+	}
+
+	// checks max vertex att
+	void	getMaxVertexAttribs()
+	{
+		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &Attributes);
+		std::cout << "Maximum numbers of vertex attributes supported: " << Attributes << std::endl;
+	}
+
+
+	// utility uniform functions
+	void	setBool(const std::string &name, bool value) const
+	{
+		glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), (int)value);
+	}
+	void	setInt(const std::string &name, int value) const
+	{
+		glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
+	}
+	void	setFloat(const std::string &name, float value) const
+	{
+		glUniform1f(glGetUniformLocation(shaderProgram, name.c_str()), value);
+	}
 };
 
 class TriangleMesh
